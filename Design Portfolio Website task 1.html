@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ravali | Portfolio</title>
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #667eea, #ab7fd6);
+      color: #f0f0f0;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: #f0f0f0;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: #ffb400;
+    }
+
+    header {
+      position: fixed;
+      width: 100%;
+      background: rgba(20, 20, 30, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    header h1 {
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+      color: #ffb400;
+    }
+
+    nav a {
+      margin-left: 2rem;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    nav a.active {
+      color: #ffb400;
+      border-bottom: 2px solid #ffb400;
+      padding-bottom: 2px;
+    }
+
+    main {
+      padding-top: 100px;
+      max-width: 1100px;
+      margin: 0 auto;
+      flex-grow: 1;
+    }
+
+    section {
+      padding: 4rem 2rem;
+      background: rgba(255, 255, 255, 0.05);
+      margin-bottom: 3rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    section:nth-child(odd) {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      color: #ffb400;
+      letter-spacing: 1px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #ddd;
+      max-width: 700px;
+    }
+
+    /* About Me */
+    #about img {
+      float: left;
+      width: 180px;
+      height: 180px;
+      margin-right: 2rem;
+      border-radius: 50%;
+      border: 4px solid #ffb400;
+      object-fit: cover;
+      box-shadow: 0 8px 16px rgba(255,180,0,0.4);
+      transition: transform 0.3s ease;
+    }
+    #about img:hover {
+      transform: scale(1.05) rotate(3deg);
+    }
+
+    /* Skills */
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .skill {
+      background: #ffb400;
+      color: #222;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-weight: 700;
+      box-shadow: 0 3px 8px rgba(255,180,0,0.6);
+      transition: background 0.3s ease;
+      cursor: default;
+    }
+
+    .skill:hover {
+      background: #ffdd72;
+    }
+
+    /* Projects */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .project-card {
+      background: #333355;
+      border-radius: 12px;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.5);
+      overflow: hidden;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(255,180,0,0.7);
+    }
+
+    .project-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      filter: brightness(0.85);
+      transition: filter 0.3s ease;
+    }
+    .project-card:hover .project-img {
+      filter: brightness(1);
+    }
+
+    .project-content {
+      padding: 1rem 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-title {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: #ffb400;
+    }
+
+    .project-desc {
+      flex-grow: 1;
+      font-size: 1rem;
+      color: #ccc;
+      margin-bottom: 1rem;
+    }
+
+    .project-links a {
+      margin-right: 1rem;
+      color: #ffb400;
+      font-weight: 600;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s ease;
+    }
+    .project-links a:hover {
+      border-color: #ffb400;
+    }
+
+    /* Contact */
+    #contact form {
+      max-width: 500px;
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    #contact label {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #ffb400;
+    }
+
+    #contact input,
+    #contact textarea {
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+      background: #444466;
+      color: #eee;
+      transition: background 0.3s ease;
+      resize: vertical;
+    }
+
+    #contact input:focus,
+    #contact textarea:focus {
+      background: #555588;
+      outline: none;
+      box-shadow: 0 0 8px #ffb400;
+    }
+
+    #contact button {
+      background: #ffb400;
+      border: none;
+      color: #222;
+      font-weight: 700;
+      padding: 0.75rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      box-shadow: 0 6px 12px rgba(255,180,0,0.6);
+      transition: background 0.3s ease;
+    }
+    #contact button:hover {
+      background: #ffdd72;
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(20, 20, 30, 0.85);
+      padding: 1rem 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #888;
+      box-shadow: inset 0 1px 2px rgba(255,255,255,0.1);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      #about img {
+        float: none;
+        display: block;
+        margin: 0 auto 1rem;
+        width: 150px;
+        height: 150px;
+      }
+
+      nav a {
+        margin-left: 1rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Dumpati Ravali</h1>
+    <nav>
+      <a href="#about" class="active">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="about">
+      <h2>About Me</h2>
+      <img src="c:\Users\HP\OneDrive\Pictures\girl.avif" alt="Profile Picture" />
+      <p>Hello! I'm Dumpati Ravali, a passionate full-stack developer with a knack for creating modern and responsive web applications. I love blending creativity and technology to build beautiful, user-friendly digital experiences. Welcome to my portfolio where I showcase my skills and projects.</p>
+    </section>
+
+    <section id="skills">
+      <h2>Skills</h2>
+      <div class="skills-list">
+        <div class="skill">HTML5</div>
+        <div class="skill">CSS3</div>
+        <div class="skill">JavaScript</div>
+        <div class="skill">React</div>
+        <div class="skill">Node.js</div>
+        <div class="skill">Express</div>
+        <div class="skill">MongoDB</div>
+        <div class="skill">Git & GitHub</div>
+        <div class="skill">Responsive Design</div>
+        <div class="skill">UI/UX Design</div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card" tabindex="0">
+          <img src="c:\Users\HP\OneDrive\Pictures\motion-array-portfolio-website-builder.jpg" alt="Project 1" class="project-img" />
+          <div class="project-content">
+            <h3 class="project-title">Creative Portfolio Website</h3>
+            <p class="project-desc">A modern, responsive portfolio website built with HTML, CSS, and JavaScript to showcase my skills and projects beautifully.</p>
+            <div class="project-links">
+              <a href="#" target="_blank" rel="noopener noreferrer">Live Demo</a>
+              <a href="#" target="_blank" rel="noopener noreferrer">Source Code</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card" tabindex="0">
+          <img src="c:\Users\HP\OneDrive\Pictures\WhatsApp Image 2025-06-28 at 17.23.53_5de287f3.jpg" alt="Project 2" class="project-img" />
+          <div class="project-content">
+            <h3 class="project-title">Food Ordering App</h3>
+            <p class="project-desc">An interactive food ordering web app with real-time notifications and smooth UI for easy user experience.</p>
+            <div class="project-links">
+              <a href="#" target="_blank" rel="noopener noreferrer">Live Demo</a>
+              <a href="#" target="_blank" rel="noopener noreferrer">Source Code</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card" tabindex="0">
+          <img src="c:\Users\HP\OneDrive\Pictures\WhatsApp Image 2025-06-28 at 17.23.55_1cab6479.jpg" alt="Project 3" class="project-img" />
+          <div class="project-content">
+            <h3 class="project-title">Dashboard System</h3>
+            <p class="project-desc">A dynamic admin dashboard system built with React and Node.js for managing users, orders, and analytics.</p>
+            <div class="project-links">
+              <a href="#" target="_blank" rel="noopener noreferrer">Live Demo</a>
+              <a href="#" target="_blank" rel="noopener noreferrer">Source Code</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <form onsubmit="event.preventDefault(); alert('Thank you for reaching out! I will get back to you soon.'); this.reset();">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Your full name" required />
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Your email address" required />
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Glory Glory | Designed with ❤ by ChatGPT
+  </footer>
+
+</body>
+</html>
