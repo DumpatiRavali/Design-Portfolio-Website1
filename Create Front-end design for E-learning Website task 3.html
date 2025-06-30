@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EduSpark - E-learning Platform</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #e7eee9;
+      color: #333;
+    }
+
+    header {
+      background-color: #c80b3d;
+      color: rgb(41, 14, 14);
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: rgb(81, 10, 223);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #e01212;
+    }
+
+    .btn {
+      background: #0ac98c;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #ca1720;
+    }
+
+    section {
+      display: none;
+      padding: 60px 40px;
+      text-align: center;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    h1, h2 {
+      margin-bottom: 20px;
+      color: #1976d2;
+    }
+
+    p {
+      max-width: 800px;
+      margin: 0 auto 20px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .card {
+      background: rgb(120, 162, 134);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    footer {
+      background: #1976d2;
+      color: rgb(204, 134, 134);
+      text-align: center;
+      padding: 20px 10px;
+      margin-top: 40px;
+    }
+
+    /* Modal Sign In */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .modal-content {
+      background: rgb(244, 243, 245);
+      padding: 30px 40px;
+      border-radius: 10px;
+      width: 300px;
+      text-align: center;
+      position: relative;
+    }
+
+    .modal-content input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #f7f4f4;
+      border-radius: 8px;
+    }
+
+    .modal-content button {
+      background-color: #9a0a48;
+      color: rgba(234, 230, 230, 0.562);
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .modal-content button:hover {
+      background-color: #21a56c;
+    }
+
+    .close {
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      header { flex-direction: column; gap: 10px; }
+      nav ul { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">EduSpark</div>
+    <nav>
+      <ul>
+        <li><a href="#" onclick="showSection('home')">Home</a></li>
+        <li><a href="#" onclick="showSection('courses')">Courses</a></li>
+        <li><a href="#" onclick="showSection('about')">About</a></li>
+        <li><a href="#" onclick="showSection('contact')">Contact</a></li>
+      </ul>
+    </nav>
+    <button class="btn" onclick="openModal()">Sign In</button>
+  </header>
+
+  <!-- Sections -->
+  <section id="home" class="active">
+    <h1>Welcome to EduSpark</h1>
+    <p>Your one-stop platform for online learning. Explore a wide range of topics and boost your knowledge.</p>
+    <img src="https://via.placeholder.com/800x300?text=E-learning+Banner" style="max-width: 100%; border-radius: 10px;">
+  </section>
+
+  <section id="courses">
+    <h2>🌟 Popular Courses</h2>
+    <div class="cards">
+      <div class="card">
+        <img src="c:\Users\HP\OneDrive\Pictures\python.jpg" alt="Python">
+        <h3>Python Programming</h3>
+        <p>Master Python from basics to advanced with hands-on projects.</p>
+      </div>
+      <div class="card">
+        <img src="c:\Users\HP\OneDrive\Pictures\web.jpg" alt="Web Dev">
+        <h3>Web Development</h3>
+        <p>Learn HTML, CSS, JavaScript and build your own websites.</p>
+      </div>
+      <div class="card">
+        <img src="c:\Users\HP\OneDrive\Pictures\ui.jpg"alt="AI">
+        <h3>AI & Machine Learning</h3>
+        <p>Dive into the future of technology with AI and ML basics.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>📘 About EduSpark</h2>
+    <p>EduSpark is an online learning platform that empowers students and professionals to upgrade their skills from anywhere in the world. We believe in accessible and quality education for all.</p>
+  </section>
+
+  <section id="contact">
+    <h2>📞 Contact Us</h2>
+    <p>Have questions? Reach out to us at <strong>contact@eduspark.com</strong> or call +91-9876543210.</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 EduSpark. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Sign In Modal -->
+  <div class="modal" id="signInModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>Sign In</h2>
+      <input type="text" id="userName" placeholder="Your Name">
+      <input type="email" id="userEmail" placeholder="Your Email">
+      <button onclick="signIn()">Login</button>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    function showSection(id) {
+      document.querySelectorAll("section").forEach(sec => {
+        sec.classList.remove("active");
+      });
+      document.getElementById(id).classList.add("active");
+    }
+
+    function openModal() {
+      document.getElementById("signInModal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("signInModal").style.display = "none";
+    }
+
+    function signIn() {
+      const name = document.getElementById("userName").value.trim();
+      const email = document.getElementById("userEmail").value.trim();
+      if (name && email) {
+        alert(`Welcome, ${name}!`);
+        closeModal();
+      } else {
+        alert("Please enter both name and email.");
+      }
+    }
+  </script>
+
+</body>
+</html>
