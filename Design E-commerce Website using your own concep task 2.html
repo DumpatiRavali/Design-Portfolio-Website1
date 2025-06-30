@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GlowMart - E-Commerce</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #a317c2, #0e8dcc);
+      color: #333;
+    }
+
+    header {
+      background: #6c63ff;
+      color: white;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ffd966;
+    }
+
+    .btn {
+      background-color: #ffd966;
+      color: #ed0e0e;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .btn:hover {
+      background-color: #a007ff;
+    }
+
+    section {
+      display: none;
+      padding: 60px 40px;
+      text-align: center;
+      animation: fadeIn 0.5s ease;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    .hero {
+      background: url('https://images.unsplash.com/photo-1516387938699-a93567ec168e?fit=crop&w=1400&q=80') no-repeat center center/cover;
+      color: rgb(14, 218, 184);
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      flex-direction: column;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      background: rgba(0,0,0,0.4);
+      top: 0; left: 0; right: 0; bottom: 0;
+    }
+
+    .hero-text {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+    }
+
+    .hero-btn {
+      background-color: #0ce86b;
+      padding: 12px 24px;
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: 25px;
+      text-decoration: none;
+    }
+
+    .hero-btn:hover {
+      background-color: #e91e63;
+    }
+
+    .products, .deals, .about, .contact {
+      background: #fff;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #6c63ff;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .card {
+      background: #f8f9fa;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 12px;
+    }
+
+    .card h3 {
+      margin: 15px 0 10px;
+    }
+
+    .card p {
+      color: #c60909;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .card button {
+      padding: 10px 16px;
+      background-color: #d10938;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .card button:hover {
+      background-color: #d30e0e;
+    }
+
+    .about p, .contact p {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+
+    footer {
+      background: #c60811;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 12px;
+      width: 300px;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      position: relative;
+    }
+
+    .modal-content input {
+      width: 90%;
+      padding: 10px;
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .modal-content button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #6c63ff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .close {
+      position: absolute;
+      right: 20px;
+      top: 15px;
+      font-size: 24px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">🌟 GlowMart</div>
+    <nav>
+      <ul>
+        <li><a href="#" onclick="navigateTo('home')">Home</a></li>
+        <li><a href="#" onclick="navigateTo('shop')">Shop</a></li>
+        <li><a href="#" onclick="navigateTo('deals')">Deals</a></li>
+        <li><a href="#" onclick="navigateTo('about')">About</a></li>
+        <li><a href="#" onclick="navigateTo('contact')">Contact</a></li>
+      </ul>
+    </nav>
+    <button class="btn" onclick="openLogin()">Sign In</button>
+  </header>
+
+  <!-- Sections -->
+  <section class="hero active" id="home">
+    <div class="hero-text">
+      <h1 id="welcomeMessage">Welcome to GlowMart</h1>
+      <p>Discover colorful deals and shop with joy!</p>
+      <a href="#" class="hero-btn" onclick="navigateTo('shop')">Start Shopping</a>
+    </div>
+  </section>
+
+  <section class="products" id="shop">
+    <h2>🛒 Trending Products</h2>
+    <div class="product-grid">
+      <div class="card">
+        <img src="c:\Users\HP\OneDrive\Pictures\collage_sneakers-900x643.jpg" alt="">
+        <h3>Cool Sneakers</h3>
+        <p>$49.99</p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="card">
+        <img src="c:\Users\HP\OneDrive\Pictures\1700032013679_SKU-0302_0.jpg" alt="">
+        <h3>Wireless Headphones</h3>
+        <p>$89.99</p>
+        <button>Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="deals" id="deals">
+    <h2>🔥 Hot Deals</h2>
+    <div class="product-grid">
+      <div class="card">
+        <img src="c:\Users\HP\OneDrive\Pictures\61+wwNBP7aL.jpg" alt="">
+        <h3>Smart Watch</h3>
+        <p>Now $79.99</p>
+        <button>Buy Now</button>
+      </div>
+      <div class="card">
+        <img src="c:\Users\HP\OneDrive\Pictures\gaming-laptops-og-image.png" alt="">
+        <h3>Gaming Laptop</h3>
+        <p>Only $999</p>
+        <button>Buy Now</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <h2>👋 About Us</h2>
+    <p>GlowMart is your favorite online store, offering a wide variety of colorful and trendy products. We’re here to make your shopping experience easy, joyful, and affordable.</p>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2>📞 Contact Us</h2>
+    <p>Need help or have questions? Reach out to our support team at <strong>support@glowmart.com</strong> or call +1-800-GLOWMART</p>
+  </section>
+
+  <!-- Login Modal -->
+  <div class="modal" id="loginModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeLogin()">&times;</span>
+      <h2>Sign In</h2>
+      <input type="text" id="username" placeholder="Enter your name">
+      <button onclick="signIn()">Login</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 GlowMart. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    function openLogin() {
+      document.getElementById('loginModal').style.display = 'flex';
+    }
+
+    function closeLogin() {
+      document.getElementById('loginModal').style.display = 'none';
+    }
+
+    function signIn() {
+      const name = document.getElementById('username').value.trim();
+      if (name) {
+        document.getElementById('welcomeMessage').innerText = `Welcome, ${name}!`;
+        closeLogin();
+      } else {
+        alert("Please enter your name.");
+      }
+    }
+
+    function navigateTo(id) {
+      document.querySelectorAll("section").forEach(sec => {
+        sec.classList.remove("active");
+      });
+      document.getElementById(id).classList.add("active");
+    }
+  </script>
+
+</body>
+</html>
